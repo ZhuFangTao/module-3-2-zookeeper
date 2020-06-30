@@ -31,6 +31,7 @@ public class DbPoolConnectUtil {
         dataSource.setDriverClassName(properties.getProperty("driver_class"));
         dataSource.setUsername(properties.getProperty("user_name"));
         dataSource.setPassword(properties.getProperty("password"));
+        dataSource.setMaxWait(3000);
     }
 
     public static void initConnectWithZK(CuratorFramework zkClient) throws Exception {
@@ -52,6 +53,9 @@ public class DbPoolConnectUtil {
     }
 
     public static void queryForData() throws SQLException {
+        if(dataSource == null){
+            return;
+        }
         DruidPooledConnection connection = null;
         Statement statement = null;
         ResultSet rs = null;

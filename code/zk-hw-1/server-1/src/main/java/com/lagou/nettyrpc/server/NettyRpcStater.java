@@ -55,6 +55,7 @@ public class NettyRpcStater {
                 });
 
         serverBootstrap.bind(PORT).sync();
+        //将IP及端口信息自动注册到Zookeeper
         registerInZooKeeper();
         System.out.println("Server one ready to access invoke at port:" + PORT);
         //新建一个线程处理响应的有效时间，如果超过5s则响应时间清0。防止某一次服务器响应慢导致一直不请求该服务器
